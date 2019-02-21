@@ -1,28 +1,31 @@
 package com.example.springdatademo.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * CarEntity
+ * PetEntity
  */
 @Entity
-@Table(name="CAR")
-public class CarEntity {
+@Table(name="PET")
+public class PetEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
-    private String brand;
+    @Column
+    private String type;
 
-    @OneToOne(mappedBy="car")
-    @JoinColumn(name="person_id",referencedColumnName="id")
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName="id",name="Person_ID")
     private PersonEntity person;
 
     /**
@@ -40,17 +43,17 @@ public class CarEntity {
     }
 
     /**
-     * @return the brand
+     * @return the type
      */
-    public String getBrand() {
-        return brand;
+    public String getType() {
+        return type;
     }
 
     /**
-     * @param brand the brand to set
+     * @param type the type to set
      */
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
@@ -66,6 +69,8 @@ public class CarEntity {
     public void setPerson(PersonEntity person) {
         this.person = person;
     }
+
+    
 
 
 }
